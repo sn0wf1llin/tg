@@ -455,6 +455,7 @@ def train(train_data_fname):
     history = summarizer.fit(Xtrain, Ytrain, Xtest, Ytest, epochs=DEFAULT_EPOCHS, batch_size=DEFAULT_BATCH_SIZE)
 
     history_plot_file_path = report_dir_path + '/' + Seq2SeqGloVeSummarizerV2.model_name + '-history.png'
+
     if LOAD_EXISTING_WEIGHTS:
         history_plot_file_path = report_dir_path + '/' + Seq2SeqGloVeSummarizerV2.model_name + '-history-v' + str(summarizer.version) + '.png'
 
@@ -466,7 +467,8 @@ def train(train_data_fname):
 def main():
     model_dir_path = './models'
 
-    summarizer = train(train_data_fname="news_data_merged.csv")
+    summarizer = train(train_data_fname="fake_or_real_news.csv")
+    # summarizer = train(train_data_fname="news_data_merged.csv")
     pred = summarizer.summarize("this is a short story about the cat. all call it The Mister Cat, it has hiw own car and 2 men, who drive it to the center of the city. it loves the center. there was a river, wide and great, and the air was always clean.")
     print("pred: ", pred)
     print("-"*77)
@@ -483,5 +485,16 @@ def main():
 
 
 if __name__ == '__main__':
+
+    import pandas as pd
+
+    df = pd.read_csv("./data/news_data_merged.csv")
+    print(df.shape)
+    for index, row in df.iterrows():
+        if type(row['title']) != str:
+            print(row['title'], type(row['title']))
+        if type(row['text']) != str:
+            print(row['text'], type(row['text']))
+
     # main0()
     main()
