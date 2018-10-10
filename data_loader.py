@@ -32,6 +32,10 @@ def fit_text(X, Y, input_seq_max_length=None, target_seq_max_length=None):
         max_input_seq_length = max(max_input_seq_length, seq_length)
 
     for line in Y:
+        if type(line) != str:
+            print(line)
+            continue
+            
         line2 = 'START ' + line.lower() + ' END'
 
         text = [word for word in line2.split(' ')]
