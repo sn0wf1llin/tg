@@ -290,7 +290,14 @@ class Seq2SeqGloVeSummarizerV2(object):
         temp = []
         for line in texts:
             x = []
+
+            if type(line) != str:
+                print("-"*97)
+                print(line, type(line))
+                continue
+
             line2 = 'start ' + line.lower() + ' end'
+
             for word in line2.split(' '):
                 x.append(word)
                 if len(x) >= self.max_target_seq_length:
