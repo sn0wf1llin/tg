@@ -488,7 +488,9 @@ if __name__ == '__main__':
 
     import pandas as pd
 
-    df = pd.read_csv("./data/news_data_merged.csv")
+    df = pd.read_csv("data/news_data_merged.csv")
+    df = df.dropna()
+    
     print(df.shape)
     for index, row in df.iterrows():
         if type(row['title']) != str:
