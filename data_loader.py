@@ -33,8 +33,6 @@ def fit_text(X, Y, input_seq_max_length=None, target_seq_max_length=None):
 
     for line in Y:
         if type(line) != str:
-            print("-"*97)
-            print(line, type(line))
             continue
 
         line2 = 'START ' + line.lower() + ' END'

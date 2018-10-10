@@ -292,8 +292,6 @@ class Seq2SeqGloVeSummarizerV2(object):
             x = []
 
             if type(line) != str:
-                print("-"*97)
-                print(line, type(line))
                 continue
 
             line2 = 'start ' + line.lower() + ' end'
