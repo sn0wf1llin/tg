@@ -192,7 +192,7 @@ DASHA_SUMMARY = """Data is the new means of production, more powerful than the l
 from sklearn.model_selection import train_test_split
 from glove_loader import load_glove
 import os
-from tdata_loader import fit_text
+from data_loader import fit_text
 from plot_utils import plot_and_save_history
 
 
