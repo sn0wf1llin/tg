@@ -432,6 +432,7 @@ def train(train_data_fname):
 
     print('loading csv file ...')
     df = pd.read_csv(data_dir_path + "/{}".format(train_data_fname))
+    df = df.dropna()
 
     print('extract configuration from input texts ...')
     Y = df.title
@@ -485,18 +486,5 @@ def main():
 
 
 if __name__ == '__main__':
-
-    import pandas as pd
-
-    df = pd.read_csv("data/news_data_merged.csv")
-    df = df.dropna()
-    
-    print(df.shape)
-    for index, row in df.iterrows():
-        if type(row['title']) != str:
-            print(row['title'], type(row['title']))
-        if type(row['text']) != str:
-            print(row['text'], type(row['text']))
-
     # main0()
     main()
