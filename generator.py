@@ -447,7 +447,7 @@ def train(train_data_fname):
     if LOAD_EXISTING_WEIGHTS:
         summarizer.load_weights(weight_file_path=Seq2SeqGloVeSummarizerV2.get_weight_file_path(model_dir_path=model_dir_path))
 
-    Xtrain, Xtest, Ytrain, Ytest = train_test_split(X, Y, test_size=0.2, random_state=42)
+    Xtrain, Xtest, Ytrain, Ytest = train_test_split(X, Y, test_size=0.02, random_state=42)
 
     print('demo size: ', len(Xtrain))
     print('testing size: ', len(Xtest))
