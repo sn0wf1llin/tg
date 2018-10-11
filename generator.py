@@ -196,11 +196,11 @@ from data_loader import fit_text
 from plot_utils import plot_and_save_history
 
 
-LOAD_EXISTING_WEIGHTS = False
+LOAD_EXISTING_WEIGHTS = True
 GLOVE_EMBEDDING_SIZE = 100
-HIDDEN_UNITS = 128
-DEFAULT_EPOCHS = 150
-DEFAULT_BATCH_SIZE = 150
+HIDDEN_UNITS = 100
+DEFAULT_EPOCHS = 100
+DEFAULT_BATCH_SIZE = 1500
 VERBOSE = 1
 
 
@@ -468,7 +468,7 @@ def train(train_data_fname):
 def main():
     model_dir_path = './models'
 
-    summarizer = train(train_data_fname="fake_or_real_news.csv")
+    summarizer = train(train_data_fname="news_data_merged.csv")
     # summarizer = train(train_data_fname="news_data_merged.csv")
     pred = summarizer.summarize("this is a short story about the cat. all call it The Mister Cat, it has hiw own car and 2 men, who drive it to the center of the city. it loves the center. there was a river, wide and great, and the air was always clean.")
     print("pred: ", pred)
