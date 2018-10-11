@@ -468,9 +468,9 @@ def train(train_data_fname):
 def main():
     model_dir_path = './models'
 
-    summarizer = train(train_data_fname="news_data_merged.csv")
+    summarizer = train(train_data_fname="cut_data_5k.csv")
     # summarizer = train(train_data_fname="news_data_merged.csv")
-    pred = summarizer.summarize("this is a short story about the cat. all call it The Mister Cat, it has hiw own car and 2 men, who drive it to the center of the city. it loves the center. there was a river, wide and great, and the air was always clean.")
+    pred = summarizer.summarize("The recognition, collection, identification, individualization, and interpretation of physical evidence, and the application of science and medicine for criminal and civil law, or regulatory purposes.")
     print("pred: ", pred)
     print("-"*77)
 
