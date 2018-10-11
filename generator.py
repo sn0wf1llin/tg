@@ -199,7 +199,7 @@ from plot_utils import plot_and_save_history
 LOAD_EXISTING_WEIGHTS = True
 GLOVE_EMBEDDING_SIZE = 100
 HIDDEN_UNITS = 128
-DEFAULT_EPOCHS = 100
+DEFAULT_EPOCHS = 500
 DEFAULT_BATCH_SIZE = 50
 VERBOSE = 1
 
@@ -470,7 +470,7 @@ def main():
 
     summarizer = train(train_data_fname="cut_data_5k.csv")
     # summarizer = train(train_data_fname="news_data_merged.csv")
-    pred = summarizer.summarize("The recognition, collection, identification, individualization, and interpretation of physical evidence, and the application of science and medicine for criminal and civil law, or regulatory purposes.")
+    pred = summarizer.summarize(BIG_TEXT)
     print("pred: ", pred)
     print("-"*77)
 
@@ -480,7 +480,7 @@ def main():
     summarizer._load_glove("./large_data")
     summarizer.load_weights(weight_file_path=Seq2SeqGloVeSummarizerV2.get_weight_file_path(model_dir_path=model_dir_path))
 
-    pred = summarizer.summarize("The recognition, collection, identification, individualization, and interpretation of physical evidence, and the application of science and medicine for criminal and civil law, or regulatory purposes.")
+    pred = summarizer.summarize(BIG_TEXT)
     print("pred: ", pred)
     print("-" * 77)
 
