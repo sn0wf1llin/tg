@@ -7,7 +7,7 @@ import numpy as np
 import random
 from keras.preprocessing import sequence
 
-from tg.summarizator.constants import EMPTY_VOCAB_IDX, EOS_VOCAB_IDX, MAXLEND, MAXLENH, MAXLEN
+from constants import EMPTY_VOCAB_IDX, EOS_VOCAB_IDX, MAXLEND, MAXLENH, MAXLEN
 
 
 def lpadd(x):

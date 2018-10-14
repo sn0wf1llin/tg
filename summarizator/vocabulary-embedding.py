@@ -8,11 +8,11 @@ from os import path
 import string
 import re
 
-import tg.summarizator.config as config
+import config
 import _pickle as pickle
 from collections import Counter
 import numpy as np
-from tg.summarizator.data2pkl import data2pkl
+from data2pkl import data2pkl
 import matplotlib.pyplot as plt
 
 # static vars

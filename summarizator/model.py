@@ -8,8 +8,8 @@ from keras.layers.core import Lambda
 import keras.backend as K
 import numpy as np
 
-from tg.summarizator.utils import str_shape
-from tg.summarizator.constants import MAXLEND, MAXLENH, MAXLEN, activation_rnn_size, optimizer, p_W, p_U, p_dense, \
+from utils import str_shape
+from constants import MAXLEND, MAXLENH, MAXLEN, activation_rnn_size, optimizer, p_W, p_U, p_dense, \
     p_emb, regularizer
 
 

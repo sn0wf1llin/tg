@@ -14,8 +14,8 @@ import numpy as np
 from keras.preprocessing import sequence
 from keras.utils import np_utils
 
-from tg.summarizator.constants import EMPTY_VOCAB_IDX, EOS_VOCAB_IDX, MAXLEND, MAXLENH, MAXLEN, seed
-from tg.summarizator.sample_gen import vocab_fold, lpadd
+from constants import EMPTY_VOCAB_IDX, EOS_VOCAB_IDX, MAXLEND, MAXLENH, MAXLEN, seed
+from sample_gen import vocab_fold, lpadd
 
 
 def flip_headline(x, nflips, model, debug, oov0, idx2word):

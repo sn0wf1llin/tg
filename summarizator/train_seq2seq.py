@@ -12,12 +12,12 @@ import json
 import numpy as np
 from keras.callbacks import TensorBoard
 
-import tg.summarizator.config as config
-from tg.summarizator.sample_gen import gensamples
-from tg.summarizator.utils import prt, load_embedding, process_vocab, load_split_data
-from tg.summarizator.model import create_model, inspect_model
-from tg.summarizator.generate import gen
-from tg.summarizator.constants import WEIGHTS_FILENAME, seed, nb_unknown_words
+import config
+from sample_gen import gensamples
+from utils import prt, load_embedding, process_vocab, load_split_data
+from model import create_model, inspect_model
+from generate import gen
+from constants import WEIGHTS_FILENAME, seed, nb_unknown_words
 
 
 def main():

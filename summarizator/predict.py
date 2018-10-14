@@ -9,10 +9,10 @@ from tg.summarizator.utils import str_shape
 import keras.backend as K
 import argparse
 
-from tg.summarizator.config import path_models, path_data
-from tg.summarizator.constants import WEIGHTS_FILENAME, VOCAB_EMBEDDINGS_FILENAME, nb_unknown_words, EOS_VOCAB_IDX
-from tg.summarizator.model import create_model
-from tg.summarizator.sample_gen import gensamples
+from config import path_models, path_data
+from constants import WEIGHTS_FILENAME, VOCAB_EMBEDDINGS_FILENAME, nb_unknown_words, EOS_VOCAB_IDX
+from model import create_model
+from sample_gen import gensamples
 
 # set seeds in random libraries
 seed = 42

@@ -3,8 +3,8 @@ import os
 from sklearn.model_selection import train_test_split
 import _pickle as pickle
 
-import tg.summarizator.config as config
-from tg.summarizator.constants import EMPTY_VOCAB_IDX, EOS_VOCAB_IDX, VOCAB_EMBEDDINGS_FILENAME
+import config
+from constants import EMPTY_VOCAB_IDX, EOS_VOCAB_IDX, VOCAB_EMBEDDINGS_FILENAME
 
 
 def join_ingredients(ingredients_listlist):

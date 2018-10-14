@@ -2,7 +2,7 @@ import json
 import gzip
 import pickle
 
-import tg.summarizator.config as config
+import config
 
 SIGNALMEDIA_DATA_FILENAME = config.path_data + '/' + 'signalmedia-1m.jsonl.gz'
 
