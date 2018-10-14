@@ -21,6 +21,7 @@ seed = 42
 vocab_size = 40000
 embedding_dim = 100
 clean = True
+SAMPLES_COUNT = 100000
 
 # index words
 empty = 0  # RNN mask of no data
@@ -52,7 +53,7 @@ def load_text():
     # todo rebuild tokens.pkl
     """Return vocabulary for pickled headlines and descriptions."""
 
-    data2pkl(acount=100)
+    data2pkl(acount=SAMPLES_COUNT)
 
     # read tokenized headlines and descriptions
     with open(config.path_data + '/' + 'tokens.pkl', 'rb') as fp:
