@@ -148,7 +148,6 @@ def copy_glove_weights(embedding, idx2word, glove_embedding_weights, glove_index
     c = 0
     for i in range(len(idx2word)):
         w = idx2word[i]
-        print(w)
         g = glove_index_dict.get(w, glove_index_dict.get(w.lower()))
 
         if g is None and w.startswith('#'):  # glove has no hashtags (I think...)
@@ -156,8 +155,12 @@ def copy_glove_weights(embedding, idx2word, glove_embedding_weights, glove_index
             g = glove_index_dict.get(w, glove_index_dict.get(w.lower()))
 
         if g is not None:
-            embedding[i, :] = glove_embedding_weights[g, :]
-            c += 1
+            try:
+                embedding[i, :] = glove_embedding_weights[g, :]
+                c += 1
+            except Exception as e:
+                print("broke at word = {}, c = {},\ng = {}".format(w, c, g))
+                break
 
     print('number of tokens, in small vocab: {:,} found in glove and copied to embedding: {:.4f}'.format(c, c / float(vocab_size)))
 
