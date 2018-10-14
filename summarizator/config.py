@@ -3,7 +3,8 @@ from os import path, makedirs
 from psettings import DEFAULT_PROJECT_PATH
 
 
-path_base = DEFAULT_PROJECT_PATH + 'tg/summarizator'
+# path_base = DEFAULT_PROJECT_PATH + 'tg/summarizator'
+path_base = "/home/ec2-user/Documents/tg/summarizator"
 path_data = path_base + '/data'
 path_models = path_base + '/models'
 path_logs = path_models + '/logs'
