@@ -22,18 +22,19 @@ from constants import WEIGHTS_FILENAME, seed, nb_unknown_words
 
 def main():
     # python summarizator/train_seq2seq.py --batch-size 10 --epochs 100 --nsamples 50 --temperature 0.2 --lr 0.001
+    # python train_seq2seq.py --batch-size 1000 --epochs 1000 --nsamples 500 --temperature 0.2 --lr 0.001
     # python tg/summarizator/train_seq2seq.py --batch-size 10 --epochs 100 --nsamples 50 --temperature 0.2 --lr 0.001 --warm-start
 
     # parse arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument('--batch-size', type=int, default=32, help='input batch size')
-    parser.add_argument('--epochs', type=int, default=10, help='number of epochs')
+    parser.add_argument('--batch-size', type=int, default=1000, help='input batch size')
+    parser.add_argument('--epochs', type=int, default=1000, help='number of epochs')
     parser.add_argument('--rnn-size', type=int, default=512, help='size of RNN layers')
     parser.add_argument('--rnn-layers', type=int, default=3, help='number of RNN layers')
-    parser.add_argument('--nsamples', type=int, default=640, help='number of samples per epoch')
+    parser.add_argument('--nsamples', type=int, default=500, help='number of samples per epoch')
     parser.add_argument('--nflips', type=int, default=0, help='number of flips')
-    parser.add_argument('--temperature', type=float, default=.8, help='RNN temperature')
-    parser.add_argument('--lr', type=float, default=0.0001, help='learning rate, default=0.0001')
+    parser.add_argument('--temperature', type=float, default=.2, help='RNN temperature')
+    parser.add_argument('--lr', type=float, default=0.001, help='learning rate, default=0.0001')
     parser.add_argument('--warm-start', action='store_true')
     args = parser.parse_args()
     batch_size = args.batch_size
