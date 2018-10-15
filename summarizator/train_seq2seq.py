@@ -52,6 +52,7 @@ def main():
     oov0 = vocab_size - nb_unknown_words
     idx2word = process_vocab(idx2word, vocab_size, oov0, nb_unknown_words)
     X_train, X_test, Y_train, Y_test = load_split_data(nb_val_samples, seed)
+    print("X train: {}, X test: {}\nY train: {}, Y test: {}\n".format(X_train.shape, X_test.shape, Y_train.shape, Y_test.shape))
 
     print('Random head, description:')
     i = 8
