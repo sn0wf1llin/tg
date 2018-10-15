@@ -115,7 +115,3 @@ def load_split_data(nb_val_samples, seed):
     del X, Y  # free up memory by removing X and Y
 
     return X_train, X_test, Y_train, Y_test
-
-
-if __name__ == '__main__':
-    print(url_to_filename('http://stackoverflow.com/questions/295135/turn-a-string-into-a-valid-filename'))

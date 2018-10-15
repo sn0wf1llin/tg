@@ -156,14 +156,10 @@ def gensamples(
     X, Y = data
 
     # if data is full dataset pick a random header and description
-    print("in sample_gen - DEBUG")
-    print(X, type(X))
-    for i in X:
-        print(i)
-    print("-" * 88)
-    for i in Y:
-        print(i)
-    print("-" * 88)
+    if not X:
+        print("in sample_gen - DEBUG")
+        print("X: ", X, type(X))
+        exit()
 
     if not isinstance(X[0], int):
         i = random.randint(0, len(X) - 1)
