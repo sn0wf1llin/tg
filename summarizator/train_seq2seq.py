@@ -43,7 +43,7 @@ def main():
     # set sample sizes
     nb_train_samples = int((1 - args.val_percent) * args.nsamples)  # num training samples
     nb_val_samples = int(args.val_percent * args.nsamples)  # num validation samples
-    
+    #
     # seed weight initialization
     random.seed(seed)
     np.random.seed(seed)
@@ -52,7 +52,7 @@ def main():
     vocab_size, embedding_size = embedding.shape
     oov0 = vocab_size - nb_unknown_words
     idx2word = process_vocab(idx2word, vocab_size, oov0, nb_unknown_words)
-    X_train, X_test, Y_train, Y_test = load_split_data(nb_train_samples + nb_val_samples, seed)
+    X_train, X_test, Y_train, Y_test = load_split_data(args.val_percent, seed)
     print("X train: {}, X test: {}\nY train: {}, Y test: {}\n".format(len(X_train), len(X_test), len(Y_train), len(Y_test)))
 
     print('Random head, description:')
@@ -145,7 +145,7 @@ def main():
     valgen = gen(X_test,
                  Y_test,
                  batch_size=batch_size,
-                 nb_batches=nb_val_samples // batch_size,
+                 nb_batches=nb_train_samples // batch_size,
                  nflips=None,
                  model=None,
                  debug=False,
@@ -165,10 +165,8 @@ def main():
     # train model and save weights
     h = model.fit_generator(
         traingen,
-        samples_per_epoch=nb_train_samples,
         nb_epoch=args.epochs,
         validation_data=valgen,
-        nb_val_samples=nb_val_samples,
         callbacks=callbacks,
     )
     try:
