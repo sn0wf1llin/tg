@@ -165,10 +165,11 @@ def main():
     # train model and save weights
     h = model.fit_generator(
         traingen,
+        samples_per_epoch=batch_size * 5,
         nb_epoch=args.epochs,
         validation_data=valgen,
+        nb_val_samples=nb_val_samples,
         callbacks=callbacks,
-	    steps_per_epoch=5,
     )
     try:
         prefix_model_name = "batch_{}_epochs_{}_rnn_size_{}".format(args.batch_size, args.epochs, args.rnn_size)
