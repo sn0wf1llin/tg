@@ -107,7 +107,7 @@ def main(sample_str=None):
         stripped = [w.translate(table) for w in words]
 
         sample_str_rfcd = ''
-        
+
         for w in stripped:
             try:
                 sample_str_rfcd += idx2word[w] + ' '
