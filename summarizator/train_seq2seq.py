@@ -55,7 +55,7 @@ def main():
     print("X train: {}, X test: {}\nY train: {}, Y test: {}\n".format(len(X_train), len(X_test), len(Y_train), len(Y_test)))
 
     print('Random head, description:')
-    i = random.randint(1, 40000)
+    i = random.randint(1, 1000)
     prt('H', Y_train[i], idx2word)
     prt('D', X_train[i], idx2word)
 
