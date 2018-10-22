@@ -99,8 +99,19 @@ def main(sample_str=None):
         print('Randomly sampled text:\n{}\n{}\n{}\n{}'.format("-"*77, sample_title, sample_str, "-"*77))
 
     else:
+        sample_str_rfcd = ''
+
+        for w in sample_str:
+            try:
+                sample_str_rfcd += idx2word[w] + ' '
+            except KeyError as e:
+                print("{} caused {}.".format(w, e))
+
         sample_title = ''
         y = [EOS_VOCAB_IDX]
+
+        print(sample_str_rfcd)
+        sample_str = sample_str_rfcd
 
     x = [word2idx[w.rstrip('^')] for w in sample_str.split()]
 
