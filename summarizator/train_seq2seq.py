@@ -22,7 +22,7 @@ from constants import WEIGHTS_FILENAME, seed, nb_unknown_words
 
 def main():
     # python summarizator/train_seq2seq.py --batch-size 10 --epochs 100 --nsamples 50 --temperature 0.2 --lr 0.001
-    # python train_seq2seq.py --batch-size 100 --epochs 1000 --nsamples 500 --temperature 0.2 --lr 0.001
+    # python train_seq2seq.py --batch-size 1000 --epochs 10 --nsamples 5000 --temperature 0.2 --lr 0.001
     # python tg/summarizator/train_seq2seq.py --batch-size 10 --epochs 100 --nsamples 50 --temperature 0.2 --lr 0.001 --warm-start
 
     # parse arguments
@@ -31,7 +31,7 @@ def main():
     parser.add_argument('--epochs', type=int, default=1000, help='number of epochs')
     parser.add_argument('--rnn-size', type=int, default=512, help='size of RNN layers')
     parser.add_argument('--rnn-layers', type=int, default=3, help='number of RNN layers')
-    parser.add_argument('--nsamples', type=int, default=5000, help='number of samples per epoch')
+    parser.add_argument('--nsamples', type=int, help='number of samples per epoch')
     parser.add_argument('--nflips', type=int, default=0, help='number of flips')
     parser.add_argument('--temperature', type=float, default=.2, help='RNN temperature')
     parser.add_argument('--lr', type=float, default=0.001, help='learning rate, default=0.0001')
@@ -55,7 +55,7 @@ def main():
     print("X train: {}, X test: {}\nY train: {}, Y test: {}\n".format(len(X_train), len(X_test), len(Y_train), len(Y_test)))
 
     print('Random head, description:')
-    i = 8
+    i = random.randint(1, 40000)
     prt('H', Y_train[i], idx2word)
     prt('D', X_train[i], idx2word)
 
@@ -171,7 +171,8 @@ def main():
         callbacks=callbacks,
     )
     try:
-        model.save_weights(pretrained_weights_filename, overwrite=True)
+        prefix_model_name = "batch_{}_epochs_{}_rnn_size_{}".format(args.batch_size, args.epochs, args.rnn_size)
+        model.save_weights(pretrained_weights_filename + "_" + prefix_model_name)#, overwrite=True)
         print('Model weights saved to {}'.format(pretrained_weights_filename))
 
     except Exception as e:

@@ -101,19 +101,7 @@ def main(sample_str=None):
         print('Randomly sampled text:\n{}\n{}\n{}\n{}'.format("-"*77, sample_title, sample_str, "-"*77))
 
     else:
-        words = re.split(r'\W+', sample_str)
-        # remove punctuation from each word
-        table = str.maketrans('', '', string.punctuation)
-        stripped = [w.translate(table) for w in words]
-        print(stripped, type(stripped))
-
-        sample_str_rfcd = ''
-
-        for w in stripped:
-            try:
-                sample_str_rfcd += idx2word[w] + ' '
-            except KeyError as e:
-                print("{} caused {}.".format(w, e))
+        sample_str_rfcd = clean_text(sample_str)
 
         sample_title = ''
         y = [EOS_VOCAB_IDX]

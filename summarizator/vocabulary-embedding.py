@@ -21,7 +21,7 @@ seed = 42
 vocab_size = 40000
 embedding_dim = 100
 clean = True
-SAMPLES_COUNT = 5000
+SAMPLES_COUNT = 50000
 
 # index words
 empty = 0  # RNN mask of no data
@@ -213,7 +213,7 @@ def build_word_to_glove(embedding, word2idx, idx2word, glove_index_dict, glove_e
                 score[embedding_idx] = -1
 
     glove_match.sort(key=lambda x: -x[2])
-    print()
+
     print('# of GloVe substitutes found: {:,}'.format(len(glove_match)))
 
     # manually check that the worst substitutions we are going to do are good enough

@@ -22,7 +22,7 @@ nb_unknown_words = 10
 
 # function names
 VOCAB_EMBEDDINGS_FILENAME = 'vocabulary-embedding'  # filename of vocab embeddings
-WEIGHTS_FILENAME = 'weights_v0'  # filename of model weights
+WEIGHTS_FILENAME = 'weights_v'  # filename of model weights
 
 # training variables
 seed = 42
