@@ -31,7 +31,8 @@ def main():
     parser.add_argument('--epochs', type=int, default=1000, help='number of epochs')
     parser.add_argument('--rnn-size', type=int, default=512, help='size of RNN layers')
     parser.add_argument('--rnn-layers', type=int, default=3, help='number of RNN layers')
-    parser.add_argument('--nsamples', type=int, help='number of samples per epoch')
+    parser.add_argument('--nsamples', type=int, default=5000, help='number of samples per epoch')
+    parser.add_argument('--val-percent', type=int, default=0.1, help='percent of data validate on')
     parser.add_argument('--nflips', type=int, default=0, help='number of flips')
     parser.add_argument('--temperature', type=float, default=.2, help='RNN temperature')
     parser.add_argument('--lr', type=float, default=0.001, help='learning rate, default=0.0001')
@@ -40,9 +41,9 @@ def main():
     batch_size = args.batch_size
 
     # set sample sizes
-    nb_train_samples = np.int(np.floor(args.nsamples / batch_size)) * batch_size  # num training samples
-    nb_val_samples = nb_train_samples  # num validation samples
-
+    nb_train_samples = int((1 - args.val_percent) * args.nsamples)  # num training samples
+    nb_val_samples = int(args.val_percent * args.nsamples)  # num validation samples
+    
     # seed weight initialization
     random.seed(seed)
     np.random.seed(seed)
@@ -51,7 +52,7 @@ def main():
     vocab_size, embedding_size = embedding.shape
     oov0 = vocab_size - nb_unknown_words
     idx2word = process_vocab(idx2word, vocab_size, oov0, nb_unknown_words)
-    X_train, X_test, Y_train, Y_test = load_split_data(nb_val_samples, seed)
+    X_train, X_test, Y_train, Y_test = load_split_data(nb_train_samples + nb_val_samples, seed)
     print("X train: {}, X test: {}\nY train: {}, Y test: {}\n".format(len(X_train), len(X_test), len(Y_train), len(Y_test)))
 
     print('Random head, description:')
