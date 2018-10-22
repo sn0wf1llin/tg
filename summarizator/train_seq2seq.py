@@ -168,6 +168,7 @@ def main():
         nb_epoch=args.epochs,
         validation_data=valgen,
         callbacks=callbacks,
+	    steps_per_epoch=5,
     )
     try:
         prefix_model_name = "batch_{}_epochs_{}_rnn_size_{}".format(args.batch_size, args.epochs, args.rnn_size)
