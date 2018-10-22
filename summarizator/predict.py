@@ -105,6 +105,7 @@ def main(sample_str=None):
         # remove punctuation from each word
         table = str.maketrans('', '', string.punctuation)
         stripped = [w.translate(table) for w in words]
+        print(stripped, type(stripped))
 
         sample_str_rfcd = ''
 
