@@ -5,7 +5,7 @@ import json
 import pickle
 import h5py
 import numpy as np
-from tg.summarizator.utils import str_shape
+from utils import str_shape
 import keras.backend as K
 import argparse
 
