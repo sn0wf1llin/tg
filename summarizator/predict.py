@@ -1,10 +1,12 @@
 """Predict a title for a recipe."""
+import string
 from os import path
 import random
 import json
 import pickle
 import h5py
 import numpy as np
+import re
 from utils import str_shape
 import keras.backend as K
 import argparse
@@ -99,9 +101,14 @@ def main(sample_str=None):
         print('Randomly sampled text:\n{}\n{}\n{}\n{}'.format("-"*77, sample_title, sample_str, "-"*77))
 
     else:
-        sample_str_rfcd = ''
+        words = re.split(r'\W+', sample_str)
+        # remove punctuation from each word
+        table = str.maketrans('', '', string.punctuation)
+        stripped = [w.translate(table) for w in words]
 
-        for w in sample_str:
+        sample_str_rfcd = ''
+        
+        for w in stripped:
             try:
                 sample_str_rfcd += idx2word[w] + ' '
             except KeyError as e:
