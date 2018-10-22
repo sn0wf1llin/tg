@@ -21,7 +21,7 @@ seed = 42
 vocab_size = 40000
 embedding_dim = 100
 clean = True
-SAMPLES_COUNT = 1000
+SAMPLES_COUNT = 5000
 
 # index words
 empty = 0  # RNN mask of no data
