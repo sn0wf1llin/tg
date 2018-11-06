@@ -29,5 +29,6 @@ class Glove(object):
 
     GLOVE_EMBEDDING_SIZE = GLOVE_EMBEDDING_SIZE
 
-    def __init__(self):
-        self.word2em = load_glove()
+    def __init__(self, glove_data_path):
+        self.word2em = load_glove(data_dir_path=glove_data_path)
+
