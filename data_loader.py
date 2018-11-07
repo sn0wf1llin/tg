@@ -4,8 +4,43 @@ from tg.utils import *
 from psettings import DEFAULT_PROJECT_PATH
 from nltk.tokenize import sent_tokenize, word_tokenize
 import pandas as pd
+import json
+import gzip
+import pickle
 from tg.config import *
 init_nltk_data_path(DEFAULT_PROJECT_PATH + "nltk_data")
+
+
+
+def load_signalmedia_json_gz():
+	data = []
+
+	count = 0
+	file = gzip.open(DEFAULT_PROJECT_PATH + 'tg/data/signalmedia-1m.jsonl.gz')
+
+	for each_line in file:
+		record = json.loads(each_line)
+		_k = record['title']
+		_v = record['content']
+		hl = 0
+
+		for i in _k:
+			print(i)
+			print(i.split())
+			hl += len(i.split())
+			break
+
+		if hl > sum_txt_length:
+			data.append({
+			'HEAD': _k,
+			'DESC': _v
+		})
+
+		count += 1
+		if count >= 500000:
+			break
+
+	return data
 
 
 def process_text(text, cleanit=False):
@@ -34,7 +69,6 @@ def process_text(text, cleanit=False):
 
 def load_dataset(dpath, cleanit=True, num_examples=10000):
 	df = pd.read_csv(dpath)
-	df.dropna(inplace=True)
 
 	titles = df.title.apply(process_text, args=(cleanit, ))
 	contents = df.content.apply(process_text, args=(cleanit, ))
