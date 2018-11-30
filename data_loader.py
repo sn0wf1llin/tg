@@ -24,12 +24,6 @@ def load_signalmedia_json_gz():
 		_v = record['content']
 		hl = 0
 
-		for i in _k:
-			print(i)
-			print(i.split())
-			hl += len(i.split())
-			break
-
 		if hl > sum_txt_length:
 			data.append({
 			'HEAD': _k,
