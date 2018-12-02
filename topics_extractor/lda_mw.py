@@ -8,7 +8,7 @@ import pandas as pd
 from psettings import *
 import numpy as np
 from nltk_data.stop_words_data.stop_word_processing import get_stop_words
-from topics_extractor.topics_truncate import truncate_topics_tables
+# from topics_extractor.topics_truncate import truncate_topics_tables
 
 import datetime as dt
 

@@ -92,7 +92,6 @@ def save_topics_to_csv(save_to_file_path, df):
 def merge_topics_with_in_csv(input_file_path, save_to_file_path, df, on='id', how='outer'):
 	try:
 		df_in = pd.read_csv(input_file_path)
-		print(df.head())
 
 		if df_in.index.name is None or df_in.index.name != on:
 			df_in.set_index([on], inplace=True)
@@ -175,7 +174,7 @@ def run(resource=None, period=None, last_added_only=False, data_type=None, csv_d
 
 			csv_resource_topics_df = csv_resource_topics_df.append([tmp])
 
-		# csv_resource_topics_df.set_index('id', inplace=True)
+		csv_resource_topics_df.set_index('id', inplace=True)
 
 		my_print(
 			"{} [ {} ] :: LDA topics calculated in {}".format(SUCCESS_FLAG, resource, datetime.datetime.now() - ltime_start))

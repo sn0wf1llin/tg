@@ -1,4 +1,4 @@
-from putils import my_print, is_resource_exists, get_parameters_from_csv, merge_parameters_with_in_csv, replace_ltc_nan
+from putils import my_print, is_resource_exists, get_parameters_from_csv
 import numpy as np
 from sklearn import preprocessing
 from math import *
@@ -7,6 +7,7 @@ from topics_extractor.lda_mw_handler import *
 from itertools import tee
 import datetime
 import pandas as pd
+from putils import merge_parameters_with_in_csv, replace_ltc_nan
 
 
 def _vectors_equality(vector_0, vector_1, vector_2, mini=False):

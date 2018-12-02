@@ -2,7 +2,7 @@ import time
 import datetime
 from parameters_extractor.metrics.content_check import is_text
 from psettings import *
-# from peewee_classes import Resources, Articles
+from peewee_classes import Resources, Articles
 import pandas as pd
 import numpy as np
 
@@ -62,12 +62,6 @@ def my_print(text):
 def merge_parameters_with_in_csv(input_file_path, save_to_file_path, df, on='id', how='outer'):
 	try:
 		df_in = pd.read_csv(input_file_path)
-		
-		# if df_in.index.name is None or df_in.index.name != on:
-		# 	df_in.set_index([on], inplace=True)
-
-		# if df.index.name is None or df.index.name != on:
-		# 	df.set_index([on], inplace=True)
 
 		dfinal = pd.merge(df_in, df, on=on, how=how)
 		no_unnamed_columns = [i for i in dfinal.columns if "Unnamed" not in i]
