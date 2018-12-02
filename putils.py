@@ -73,7 +73,7 @@ def merge_parameters_with_in_csv(input_file_path, save_to_file_path, df, on='id'
 		dfinal.to_csv(save_to_file_path)
 		my_print("{} Parameters saved to [ {} ]".format(SUCCESS_FLAG, save_to_file_path))
 	except Exception as e:
-		my_print("{} {}".format(EXCEPTION_FLAG, e))
+		my_print(" - - - {} {}".format(EXCEPTION_FLAG, e))
 		my_print("{} Cant save parameters to [ {} ]".format(ERROR_FLAG, save_to_file_path))
 
 
