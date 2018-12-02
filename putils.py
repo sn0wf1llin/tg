@@ -62,8 +62,12 @@ def my_print(text):
 def merge_parameters_with_in_csv(input_file_path, save_to_file_path, df, on='id', how='outer'):
 	try:
 		df_in = pd.read_csv(input_file_path)
-		print("topics-df cols : {}".format(df.columns))
-		print("merge-with-df cols : {}".format(df_in.columns))
+		
+		if df_in.index.name is None or df_in.index.name != on:
+			df_in.set_index([on], inplace=True)
+
+		if df.index.name is None or df.index.name != on:
+			df.set_index([on], inplace=True)
 
 		dfinal = pd.merge(df_in, df, on=on, how=how)
 		no_unnamed_columns = [i for i in dfinal.columns if "Unnamed" not in i]
@@ -73,7 +77,7 @@ def merge_parameters_with_in_csv(input_file_path, save_to_file_path, df, on='id'
 		dfinal.to_csv(save_to_file_path)
 		my_print("{} Parameters saved to [ {} ]".format(SUCCESS_FLAG, save_to_file_path))
 	except Exception as e:
-		my_print(" - - - {} {}".format(EXCEPTION_FLAG, e))
+		my_print("{} {}".format(EXCEPTION_FLAG, e))
 		my_print("{} Cant save parameters to [ {} ]".format(ERROR_FLAG, save_to_file_path))
 
 
