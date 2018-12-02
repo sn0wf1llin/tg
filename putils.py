@@ -60,23 +60,16 @@ def my_print(text):
 
 
 def merge_parameters_with_in_csv(input_file_path, save_to_file_path, df, on='id', how='outer'):
-	print('here0')
 	try:
 		df_in = pd.read_csv(input_file_path)
-		print('here0.5')
 		
-		if df_in.index.name is None or df_in.index.name != on:
-			df_in.set_index([on], inplace=True)
+		# if df_in.index.name is None or df_in.index.name != on:
+		# 	df_in.set_index([on], inplace=True)
 
-		if df.index.name is None or df.index.name != on:
-			df.set_index([on], inplace=True)
-
-		print('here1')
-		print(df_in.head(), "\n-----\n")
-		print(df.head(), "\n-----\n")
+		# if df.index.name is None or df.index.name != on:
+		# 	df.set_index([on], inplace=True)
 
 		dfinal = pd.merge(df_in, df, on=on, how=how)
-		print('here2')
 		no_unnamed_columns = [i for i in dfinal.columns if "Unnamed" not in i]
 
 		dfinal = dfinal[no_unnamed_columns]
