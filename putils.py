@@ -60,8 +60,10 @@ def my_print(text):
 
 
 def merge_parameters_with_in_csv(input_file_path, save_to_file_path, df, on='id', how='outer'):
+	print('here0')
 	try:
 		df_in = pd.read_csv(input_file_path)
+		print('here0.5')
 		
 		if df_in.index.name is None or df_in.index.name != on:
 			df_in.set_index([on], inplace=True)
@@ -69,7 +71,7 @@ def merge_parameters_with_in_csv(input_file_path, save_to_file_path, df, on='id'
 		if df.index.name is None or df.index.name != on:
 			df.set_index([on], inplace=True)
 
-		print('here')
+		print('here1')
 		print(df_in.head(), "\n-----\n")
 		print(df.head(), "\n-----\n")
 
