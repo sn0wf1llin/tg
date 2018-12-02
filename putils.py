@@ -28,7 +28,7 @@ def get_articles_from_db(resource_id, last_added_only, period=None, as_query=Fal
 	return arts
 
 
-def get_articles_from_csv(resource, csv_file_path, idf='cmsid', contentf='content', titlef='title', leadf='lead', social_interactionsf='total'):
+def get_articles_from_csv(resource, csv_file_path, idf='id', contentf='content', titlef='title', leadf='lead', social_interactionsf='interactions'):
 	df = pd.read_csv(csv_file_path)
 	# lead title content ---- order
 	ID = df[idf]

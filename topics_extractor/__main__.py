@@ -2,13 +2,13 @@ from putils import my_print, is_resource_exists
 import nltk
 import pandas as pd
 import datetime as dt
-from topics_extractor.topics_truncate import truncate_topics_tables
+# from topics_extractor.topics_truncate import truncate_topics_tables
 from itertools import chain, tee
 from topics_extractor.lda_mw_handler import LDAMWHandler
 import argparse
 import datetime
 from parameters_extractor.metrics.content_check import is_text
-from peewee_classes import *
+# from peewee_classes import *
 from psettings import *
 from putils import get_articles_from_db, get_articles_from_csv
 
@@ -89,7 +89,7 @@ def save_topics_to_csv(save_to_file_path, df):
 		my_print("{} Cant save topics to [ {} ]".format(ERROR_FLAG, save_to_file_path))
 
 
-def merge_topics_with_in_csv(input_file_path, save_to_file_path, df, on='id', how='inner'):
+def merge_topics_with_in_csv(input_file_path, save_to_file_path, df, on='id', how='outer'):
 	try:
 		df_in = pd.read_csv(input_file_path)
 		dfinal = df_in.merge(df, on=on, how=how)

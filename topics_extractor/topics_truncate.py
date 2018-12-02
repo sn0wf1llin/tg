@@ -1,5 +1,5 @@
 __author__ = 'MA573RWARR10R'
-from peewee_classes import *
+# from peewee_classes import *
 
 
 def truncate_topics_tables(resource):
