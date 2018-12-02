@@ -15,7 +15,7 @@ import datetime as dt
 import nltk
 import re
 import os
-from peewee_classes import Articles, Resources, Topics, TopicsResources
+# from peewee_classes import Articles, Resources, Topics, TopicsResources
 
 ENGLISH_CHARS = re.compile('[^\W_]', re.IGNORECASE)
 ALL_CHARS = re.compile('[^\W_]+', re.IGNORECASE | re.UNICODE)
