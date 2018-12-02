@@ -2,7 +2,7 @@ import time
 import datetime
 from parameters_extractor.metrics.content_check import is_text
 from psettings import *
-from peewee_classes import Resources, Articles
+# from peewee_classes import Resources, Articles
 import pandas as pd
 import numpy as np
 
