@@ -69,7 +69,12 @@ def merge_parameters_with_in_csv(input_file_path, save_to_file_path, df, on='id'
 		if df.index.name is None or df.index.name != on:
 			df.set_index([on], inplace=True)
 
+		print('here')
+		print(df_in.head(), "\n-----\n")
+		print(df.head(), "\n-----\n")
+
 		dfinal = pd.merge(df_in, df, on=on, how=how)
+		print('here2')
 		no_unnamed_columns = [i for i in dfinal.columns if "Unnamed" not in i]
 
 		dfinal = dfinal[no_unnamed_columns]
