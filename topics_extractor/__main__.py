@@ -92,6 +92,7 @@ def save_topics_to_csv(save_to_file_path, df):
 def merge_topics_with_in_csv(input_file_path, save_to_file_path, df, on='id', how='outer'):
 	try:
 		df_in = pd.read_csv(input_file_path)
+		pritn(df_in.head())
 
 		if df_in.index.name is None or df_in.index.name != on:
 			df_in.set_index([on], inplace=True)
