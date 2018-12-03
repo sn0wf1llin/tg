@@ -8,6 +8,7 @@ from parameters_extractor.metrics.additional_options import AdditionalMetricsCal
 from parameters_extractor.metrics.sentiment import PolarityMetricsCallback
 from parameters_extractor.metrics.sentiment import SubjectivityCallback
 # from peewee_classes import *
+from psettings import *
 import multiprocessing
 import argparse
 from putils import timeit, get_articles_from_db, get_articles_from_csv, merge_parameters_with_in_csv
