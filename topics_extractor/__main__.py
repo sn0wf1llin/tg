@@ -11,6 +11,7 @@ from parameters_extractor.metrics.content_check import is_text
 # from peewee_classes import *
 from psettings import *
 from putils import get_articles_from_db, get_articles_from_csv
+from multiprocessing import Pool
 
 nltk.data.path.append(DEFAULT_PROJECT_PATH + 'nltk_data/')
 
@@ -132,7 +133,9 @@ def run(resource=None, period=None, last_added_only=False, data_type=None, csv_d
 			# check content; process if it's not too short or empty
 			data = ((p.lead, p.title, p.content, res) for p in data if (is_text(p, None)[0]))
 
-			params = map(topic_ltc_by_resource, data)
+			pool = Pool()
+
+			params = pool.map(topic_ltc_by_resource, data)
 
 			for art, prms in zip(articles_s, params):
 				for par in prms:
@@ -140,6 +143,8 @@ def run(resource=None, period=None, last_added_only=False, data_type=None, csv_d
 						save_parameters(par, art)
 
 			my_print("{} [ {} ] :: LDA topics calculated in {}".format(SUCCESS_FLAG, res, datetime.datetime.now() - ltime_start))
+
+			del pool
 
 		if len(resources_iterator) != 1:
 			my_print("{}{} :: calculated in {}".format(SUCCESS_FLAG, " ".join(resources_iterator), datetime.datetime.now() - gtime_start))
@@ -161,17 +166,10 @@ def run(resource=None, period=None, last_added_only=False, data_type=None, csv_d
 
 		csv_resource_topics_df = pd.DataFrame()
 
-		for a_tuple in data:
-			a_id = a_tuple[-1]
-			prms = topic_ltc_by_resource(a_tuple, is_csv=True)
+		pool = Pool()
+		a_tmps = (pool.map(_process_csv_pool, data))
 
-			tmp = {
-				'id': a_id,
-				'element_type_{}_topic'.format(prms[1]['element_type']): prms[1]['topic'],
-				'element_type_{}_topic'.format(prms[2]['element_type']): prms[2]['topic'],
-				'element_type_{}_topic'.format(prms[3]['element_type']): prms[3]['topic'],
-			}
-
+		for tmp in a_tmps:
 			csv_resource_topics_df = csv_resource_topics_df.append([tmp])
 
 		csv_resource_topics_df.set_index('id', inplace=True)
@@ -183,6 +181,22 @@ def run(resource=None, period=None, last_added_only=False, data_type=None, csv_d
 		merge_topics_with_in_csv(csv_data_input_file_path, output_file, csv_resource_topics_df)
 	else:
 		pass
+
+
+def _process_csv_pool(data):
+	for a_tuple in data:
+		a_id = a_tuple[-1]
+		prms = topic_ltc_by_resource(a_tuple, is_csv=True)
+
+		tmp = {
+			'id': a_id,
+			'element_type_{}_topic'.format(prms[1]['element_type']): prms[1]['topic'],
+			'element_type_{}_topic'.format(prms[2]['element_type']): prms[2]['topic'],
+			'element_type_{}_topic'.format(prms[3]['element_type']): prms[3]['topic'],
+		}
+
+		yield tmp
+
 
 def train_models_for_resources(data_type, resources, resource_lang_csv=None, csv_data_file_path=None):
 	resources_names_list = []
