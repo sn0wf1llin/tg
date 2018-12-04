@@ -195,7 +195,7 @@ def _process_csv_pool(data):
 			'element_type_{}_topic'.format(prms[3]['element_type']): prms[3]['topic'],
 		}
 
-		yield tmp
+		ret tmp
 
 
 def train_models_for_resources(data_type, resources, resource_lang_csv=None, csv_data_file_path=None):
