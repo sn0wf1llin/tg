@@ -1,4 +1,6 @@
 from datetime import datetime
+from multiprocessing.pool import Pool
+
 from putils import my_print
 import pandas as pd
 import numpy as np
@@ -137,9 +139,6 @@ def save_additional_parameters(type_params, art):
 
 
 def run(corr_calc, base_calc, add_calc, resource, last_added_only, data_type, csv_data_input_file_path=None, csv_data_output_file_path=None):
-	n_cores = multiprocessing.cpu_count()
-	pool = multiprocessing.Pool(n_cores)
-
 	if data_type == 'db':
 		articles = get_articles_from_db(resource_id=resource, last_added_only=last_added_only)
 
@@ -161,7 +160,12 @@ def run(corr_calc, base_calc, add_calc, resource, last_added_only, data_type, cs
 		# extracted_simple_parameters = (process_for_simple(a_data) for a_data in articles_for_data_params_simple)
 
 		if data_type == 'db':
+			n_cores = multiprocessing.cpu_count()
+			pool = multiprocessing.Pool(n_cores)
+
 			extracted_simple_parameters = pool.imap(process_for_simple, articles_for_data_params_simple)
+
+			del pool
 
 			for art, ltc_params in zip(articles_simple, extracted_simple_parameters):
 				for param in ltc_params:
@@ -169,7 +173,11 @@ def run(corr_calc, base_calc, add_calc, resource, last_added_only, data_type, cs
 						save_parameters(art, param)
 
 		elif data_type == 'csv':
-			extracted_simple_parameters = (process_for_simple(i) for i in articles_for_data_params_simple)
+			n_cores = multiprocessing.cpu_count()
+			pool = multiprocessing.Pool(n_cores)
+
+			extracted_simple_parameters = pool.map(process_for_simple, articles_for_data_params_simple)
+			# extracted_simple_parameters = (process_for_simple(i) for i in articles_for_data_params_simple)
 
 			if csv_data_output_file_path is not None:
 				output_file = csv_data_output_file_path
@@ -178,20 +186,28 @@ def run(corr_calc, base_calc, add_calc, resource, last_added_only, data_type, cs
 
 			csv_resource_simple_parameters_df = pd.DataFrame()
 
-			for art, ltc_params in zip(articles_simple, extracted_simple_parameters):
-				a_id = art[-1]
+			pool = Pool()
+			a_tmps = (pool.map(_process_csv_pool, zip(articles_simple, extracted_simple_parameters)))
 
-				p00 = ltc_params[0]
-				p11 = ltc_params[1]
-				p22 = ltc_params[2]
-
-				p00_d = {'element_type_{}_'.format(p00['element_type']) + k: v for k, v in p00.items()}
-				p11_d = {'element_type_{}_'.format(p11['element_type']) + k: v for k, v in p11.items()}
-				p22_d = {'element_type_{}_'.format(p22['element_type']) + k: v for k, v in p22.items()}
-
-				tmp = {'id': a_id, **p00_d, **p11_d, **p22_d}
-
+			for tmp in a_tmps:
 				csv_resource_simple_parameters_df = csv_resource_simple_parameters_df.append([tmp])
+
+			del pool
+
+			# for art, ltc_params in zip(articles_simple, extracted_simple_parameters):
+			# 	a_id = art[-1]
+			#
+			# 	p00 = ltc_params[0]
+			# 	p11 = ltc_params[1]
+			# 	p22 = ltc_params[2]
+			#
+			# 	p00_d = {'element_type_{}_'.format(p00['element_type']) + k: v for k, v in p00.items()}
+			# 	p11_d = {'element_type_{}_'.format(p11['element_type']) + k: v for k, v in p11.items()}
+			# 	p22_d = {'element_type_{}_'.format(p22['element_type']) + k: v for k, v in p22.items()}
+			#
+			# 	tmp = {'id': a_id, **p00_d, **p11_d, **p22_d}
+			#
+			# 	csv_resource_simple_parameters_df = csv_resource_simple_parameters_df.append([tmp])
 
 			csv_resource_simple_parameters_df.set_index(['id'], inplace=True)
 
@@ -251,6 +267,22 @@ def run(corr_calc, base_calc, add_calc, resource, last_added_only, data_type, cs
 		my_print("{}Additional parameters for {} calculated in {}".format(SUCCESS_FLAG,
 																		  resource if resource is not None else "All resources",
 																		  datetime.now() - time_start))
+
+
+def  _process_csv_pool(a_tuple):
+	art, ltc_params = a_tuple[0], a_tuple[1]
+
+	a_id = art[-1]
+
+	p00 = ltc_params[0]
+	p11 = ltc_params[1]
+	p22 = ltc_params[2]
+
+	p00_d = {'element_type_{}_'.format(p00['element_type']) + k: v for k, v in p00.items()}
+	p11_d = {'element_type_{}_'.format(p11['element_type']) + k: v for k, v in p11.items()}
+	p22_d = {'element_type_{}_'.format(p22['element_type']) + k: v for k, v in p22.items()}
+
+	tmp = {'id': a_id, **p00_d, **p11_d, **p22_d}
 
 
 if __name__ == '__main__':
