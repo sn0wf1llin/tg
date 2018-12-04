@@ -285,6 +285,8 @@ def  _process_csv_pool(a_tuple):
 
 	tmp = {'id': a_id, **p00_d, **p11_d, **p22_d}
 
+	return tmp
+
 
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser()
