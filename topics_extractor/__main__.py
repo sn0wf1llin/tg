@@ -183,19 +183,18 @@ def run(resource=None, period=None, last_added_only=False, data_type=None, csv_d
 		pass
 
 
-def _process_csv_pool(data):
-	for a_tuple in data:
-		a_id = a_tuple[-1]
-		prms = topic_ltc_by_resource(a_tuple, is_csv=True)
+def _process_csv_pool(a_tuple):
+	a_id = a_tuple[-1]
+	prms = topic_ltc_by_resource(a_tuple, is_csv=True)
 
-		tmp = {
-			'id': a_id,
-			'element_type_{}_topic'.format(prms[1]['element_type']): prms[1]['topic'],
-			'element_type_{}_topic'.format(prms[2]['element_type']): prms[2]['topic'],
-			'element_type_{}_topic'.format(prms[3]['element_type']): prms[3]['topic'],
-		}
+	tmp = {
+		'id': a_id,
+		'element_type_{}_topic'.format(prms[1]['element_type']): prms[1]['topic'],
+		'element_type_{}_topic'.format(prms[2]['element_type']): prms[2]['topic'],
+		'element_type_{}_topic'.format(prms[3]['element_type']): prms[3]['topic'],
+	}
 
-		ret tmp
+	return tmp
 
 
 def train_models_for_resources(data_type, resources, resource_lang_csv=None, csv_data_file_path=None):
