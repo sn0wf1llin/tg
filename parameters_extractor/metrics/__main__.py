@@ -270,6 +270,7 @@ def run(corr_calc, base_calc, add_calc, resource, last_added_only, data_type, cs
 
 
 def  _process_csv_pool(a_tuple):
+	print(a_tuple, type(a_tuple))
 	art, ltc_params = a_tuple[0], a_tuple[1]
 
 	a_id = art[-1]
