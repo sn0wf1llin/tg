@@ -172,6 +172,8 @@ def run(resource=None, period=None, last_added_only=False, data_type=None, csv_d
 		for tmp in a_tmps:
 			csv_resource_topics_df = csv_resource_topics_df.append([tmp])
 
+		del pool
+		
 		csv_resource_topics_df.set_index('id', inplace=True)
 
 		my_print(
